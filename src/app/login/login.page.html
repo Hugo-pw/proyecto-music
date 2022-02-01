@@ -1,0 +1,62 @@
+
+
+<ion-content>
+
+    <img class="ion-hide" src="assets/images/musica.jpeg"/> 
+    <br><br/>
+    <strong class="title">Bienvenido </strong>
+    <br><br/>
+    <br><br/>
+
+     <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+
+      <div class="validation-error">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div
+            *ngIf="
+            loginForm.get('email').hasError(validation.type) &&
+              (loginForm.get('email').dirty || 
+              loginForm.get('email').touched
+            )"
+          >
+          <div class="alert">
+            <strong>Error: </strong> {{ validation.message }}
+          </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+
+      <div class="validation-error">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div
+            *ngIf="
+            loginForm.get('password').hasError(validation.type) &&
+              (loginForm.get('password').dirty || 
+              loginForm.get('password').touched
+            )"
+          >
+          <div class="alert">
+            <strong>Error: </strong> {{ validation.message }}
+          </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="alert" *ngIf="errorMessage != '' ">
+        <strong>Error: </strong> {{errorMessage}}
+      </div>
+      <ion-button expand="full" shape="round" color="danger" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
+    </form> 
+    <button (click)="test()">test</button>
+</ion-content>
+<ion-footer>
+<ion-button expand="full" (click)="goToRegister()">Registrate!</ion-button> 
+</ion-footer>

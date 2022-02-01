@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <h1>Artistas</h1>
+    <ion-slides [options]="slideOps" *ngIf="artists.length">
+        <ion-slide *ngFor="let artist of artists">
+            <ion-avatar (click)="showSongs(artist)">
+                <img src={{artist.images[1].url}}/>
+                <span>{{artist.name}}</span>
+            </ion-avatar>
+        </ion-slide>
+    </ion-slides>
+    <h1>Albums</h1>
+    <ion-slides [options]="slideOps" *ngIf="albums.length">
+        <ion-slide *ngFor="let album of albums">
+            <ion-avatar class="square-avatar" (click)="showAlbumSongs(album)">
+                <img src={{album.images[1].url}}/>
+                <span>{{album.name}}</span>
+            </ion-avatar>
+        </ion-slide>
+    </ion-slides>
+    <h1>Canciones</h1>
+    <ion-slides [options]="slideOps" *ngIf="songs.length">
+        <ion-slide *ngFor="let song of songs">
+            <ion-avatar class="square-avatar" (click)="playSong(song)">
+                <img src={{song.album.images[1].url}}/>
+                <span>{{song.name}}</span>
+            </ion-avatar>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
+<ion-footer *ngIf="song">
+<ion-grid>
+    <ion-row *ngIf="currentSong">
+        <ion-col class="ion-text-start">{{ parseTime(currentSong.currentTime) || "00:00" }}</ion-col>
+        <ion-col class="ion-text-end">{{ parseTime(currentSong.duration) || "00:00" }}</ion-col>
+    </ion-row>
+</ion-grid>
+
+<ion-progress-bar value="{{newTime}}" color="secondary"></ion-progress-bar>
+
+<ion-grid>
+    <ion-row >
+        <ion-col size="1">
+            <ion-icon name="heart"></ion-icon>
+        </ion-col>
+        <ion-col size="10" class="ion-text-center">
+            <ion-text>{{song.name || "Sin Reproducir"}}</ion-text>
+        </ion-col>
+        <ion-col size="1">
+            <ion-icon name="play" (click)="play()" *ngIf="!song.playing"></ion-icon>
+            <ion-icon name="pause" (click)="pause()" *ngIf="song.playing"></ion-icon>
+        </ion-col>
+    </ion-row>
+
+</ion-grid>
+
+    <!-- <ion-text color="danger" *ngIf="!song.name">
+        <h2>Aqui aparecera nuestra cancion</h2>
+    </ion-text>
+    <ion-text color="primary" *ngIf="song.name">
+        <h2>{{song.name}}</h2>
+    </ion-text> -->
+</ion-footer>

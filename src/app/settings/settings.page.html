@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configuraciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center"> <!-- Aqui utilizo mi utilidad de css -->
+  <div *ngIf="userInfo">
+    <ion-avatar (click)="source()" class="center-avatar avatar-size">
+      <img [src]="userImage" *ngIf="!photo"/>
+      <img [src]="photo" *ngIf="photo" />
+    </ion-avatar>
+    <h1>{{userInfo.name}}</h1>
+    <h2>{{userInfo.email}}</h2>
+    <ion-grid>
+      <ion-row class="ion-row-header ion-align-items-center ion-text-center">
+        <ion-col>{{userInfo.followers}}</ion-col>
+        <ion-col>{{userInfo.lists}}</ion-col>
+        <ion-col>{{userInfo.favorites_songs}}</ion-col>
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-text-center">
+        <ion-col>Seguidores</ion-col>
+        <ion-col>Listas</ion-col>
+        <ion-col>Canciones Fav</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div> 
+
+</ion-content>
